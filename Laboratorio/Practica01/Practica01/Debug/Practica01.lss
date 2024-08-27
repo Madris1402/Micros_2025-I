@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica01\Practica01\main.asm Mon Aug 26 08:55:46 2024
+AVRASM ver. 2.2.8  D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica01\Practica01\main.asm Mon Aug 26 22:55:10 2024
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
@@ -1001,6 +1001,7 @@ AVRASM ver. 2.2.8  C:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica01
 000002 b904                      	out ddrb, r16
 000003 b915                      	out portb, r17
 000004 cfff                      	fin: rjmp fin
+                                 
                                  	
 
 

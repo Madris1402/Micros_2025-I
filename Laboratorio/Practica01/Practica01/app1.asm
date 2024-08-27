@@ -10,10 +10,9 @@
 start:
 
 	ldi r16,0xff
-	ldi r17, 0xaa
+	ldi r17, 0xca
 	
-	out ddrb, r16
-	out portb, r17
+	out ddrd, r16
+	out portd, r17
 	fin: rjmp fin
 
-	
