@@ -1,0 +1,28 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica02\Practica02\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica02\Practica02\conclusiones.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica02\Practica02\Debug\Practica02.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Practica02.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Practica02.map</FILE>
+  <FILE>Practica02.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica02\Practica02\conclusiones.asm</FILE><LINE>10</LINE></start>
+  <loop><FILE>D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica02\Practica02\conclusiones.asm</FILE><LINE>20</LINE></loop>
+ </LABELS>
+</ASSEMBLER_INFO>
