@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica05\Practica05\main.asm Thu Oct 17 11:35:57 2024
+AVRASM ver. 2.2.8  D:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica05\Practica05\conclusiones.asm Wed Oct 23 22:25:03 2024
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
                                  
-                                 ;
+                                 /*
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
                                  ;*************************************************************************
@@ -985,44 +985,44 @@ AVRASM ver. 2.2.8  C:\Files\Git\Semestre 07\Micros_2025-I\Laboratorio\Practica05
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ; Practica05.asm
-                                 ;
-                                 ; Created: 17/10/2024 11:05:23 a. m.
-                                 ; Author : Madris
-                                 ;
+                                  * conclusiones.asm
+                                  *
+                                  *  Created: 23/10/2024 22:00:00
+                                  *   Author: madris
+                                  */
                                  
-000000 ef0f                      	LDI R16, 0XFF    ; metemos 8 bits en r16 (1111 1111)
-000001 b904                      	OUT DDRB, R16    ; programamos como salida (B)
                                  
-000002 e505                      	LDI R16, 0X55    ; iniciando cuenta 0x55
-000003 b905                      	OUT PORTB, R16   ; nos muestra por puerto B lo que este en r16
-                                 	CUENTA:
+000000 ef0f                      LDI R16, 0XFF ; iniciamos la cuenta en 255 (0xFF)
+000001 b904                      OUT DDRB, R16 ; programamos el puerto B como salida
                                  
-000004 d003                      	RCALL RETARDO
+                                 CUENTA:
+000002 b905                      OUT PORTB, R16 ; mostramos el valor en el puerto B
+000003 d003                      RCALL RETARDO ; llamamos al retardo
                                  
-000005 9503                      INC R16         ; hace el incremento de cuenta (0X56)
-000006 b905                      	OUT PORTB, R16  ; sale por r16
-000007 cffc                      	RJMP CUENTA     ; salto a cuenta para que se haga el ciclo
+000004 5002                      SUBI R16, 2 ; decrementamos de 2 en 2
+000005 f7e2                      BRPL CUENTA ; seguimos si R16 es positivo o cero
                                  
-                                 	; EMPIEZA RETARDO
+000006 cffb                      RJMP CUENTA ; salto para seguir el ciclo
+                                 
+                                 ; EMPIEZA RETARDO
                                  RETARDO:
-000008 e010                      	LDI R17, 0X00
-000009 e020                      	LDI R18, 0X00
-00000a e030                      	LDI R19, 0X00
-00000b e044                      	LDI R20, 0X04
-00000c e050                      	LDI R21, 0X00
+000007 e010                      LDI R17, 0X00
+000008 e020                      LDI R18, 0X00
+000009 e030                      LDI R19, 0X00
+00000a e044                      LDI R20, 0X04 ; ajuste del retardo, puedes cambiar el valor
+00000b e050                      LDI R21, 0X00
                                  
-                                 	INCREMENTO:
-00000d 9513                      	INC R17
-00000e 1315                      	CPSE R17, R21
-00000f cffd                      	RJMP INCREMENTO
-000010 9523                      	INC R18
-000011 1325                      	CPSE R18, R21
-000012 cffa                      	RJMP INCREMENTO
-000013 9533                      	INC R19
-000014 1334                      	CPSE R19, R20
-000015 cff7                      	RJMP INCREMENTO
-000016 9508                      	RET ; FIN DE LA SUBRUTINA
+                                 INCREMENTO:
+00000c 9513                      INC R17
+00000d 1315                      CPSE R17, R21
+00000e cffd                      RJMP INCREMENTO
+00000f 9523                      INC R18
+000010 1325                      CPSE R18, R21
+000011 cffa                      RJMP INCREMENTO
+000012 9533                      INC R19
+000013 1334                      CPSE R19, R20
+000014 cff7                      RJMP INCREMENTO
+000015 9508                      RET ; fin de la subrutina
 
 
 RESOURCE USE INFORMATION
@@ -1042,7 +1042,7 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   6 r17:   3 r18:   3 r19:   3 r20:   2 
+r13:   0 r14:   0 r15:   0 r16:   4 r17:   3 r18:   3 r19:   3 r20:   2 
 r21:   3 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
 Registers used: 6 out of 35 (17.1%)
@@ -1052,27 +1052,27 @@ Registers used: 6 out of 35 (17.1%)
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brne  :   0 brpl  :   1 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
 cpi   :   0 cpse  :   3 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   4 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :   7 lds   :   0 lpm   :   0 lsl   :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   3 jmp   :   0 
+ld    :   0 ldd   :   0 ldi   :   6 lds   :   0 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   3 pop   :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   2 pop   :   0 
 push  :   0 rcall :   1 ret   :   1 reti  :   0 rjmp  :   4 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
-sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 7 out of 113 (6.2%)
+sub   :   0 subi  :   1 swap  :   0 tst   :   0 wdr   :   0 
+Instructions used: 9 out of 113 (8.0%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00002e     46      0     46   32768   0.1%
+[.cseg] 0x000000 0x00002c     44      0     44   32768   0.1%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

@@ -15,7 +15,7 @@
     <Name>Practica04</Name>
     <RootNamespace>Practica04</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
-    <EntryFile>$(MSBuildProjectDirectory)\AsmFile1.asm</EntryFile>
+    <EntryFile>$(MSBuildProjectDirectory)\main.asm</EntryFile>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
@@ -80,7 +80,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AsmFile1.asm">
+    <Compile Include="conclusiones.asm">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.asm">
