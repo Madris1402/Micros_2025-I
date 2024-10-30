@@ -10,13 +10,16 @@ int pinJ2 = A2;
 int cuentaLeds = 5;
 int ledsJ1[5] = {2, 3, 4, 5, 6};
 int ledsJ2[5] = {8, 9, 10, 11, 12};
+int ledsMax = 3;
 int puntajeJ1 = 0;
 int puntajeJ2 = 0;
-int velocidad = 4000;
-int velocidad_min = 1000;
-int puntajeMax = 50;
-unsigned long tiempoLedsEn = 1000; 
+int velocidad = 1500;
+int velocidad_min = 250;
+int puntajeMax = 15;
+unsigned long tiempoLedsEn = 600; 
 unsigned long ultimoCambioLED = 0;
+unsigned long tiempoEncendidoJ1[5] = {0, 0, 0, 0, 0}; // Array para almacenar el tiempo de encendido de cada LED de J1
+unsigned long tiempoEncendidoJ2[5] = {0, 0, 0, 0, 0}; // Array para almacenar el tiempo de encendido de cada LED de J2
 
 void setup() {
   Serial.begin(9600);
@@ -29,6 +32,8 @@ void setup() {
 }
 
 void loop() {
+  unsigned long tiempoActual = millis();
+
   if (puntajeJ1 < puntajeMax && puntajeJ2 < puntajeMax) {
     contador++;
     bool acciones = false;
@@ -42,25 +47,38 @@ void loop() {
     }
 
     if (acciones) {
-      int pin_light = random(0, 5);
-      digitalWrite(ledsJ1[pin_light], HIGH);
-      digitalWrite(ledsJ2[pin_light], HIGH);
-      ultimoCambioLED = millis();
+      int ledsEncendidosJ1 = 0;
+      int ledsEncendidosJ2 = 0;
 
-      bool todosLedsEn = true;
+      // Contamos los LEDs encendidos en cada conjunto
       for (int i = 0; i < cuentaLeds; i++) {
-        if (digitalRead(ledsJ1[i]) == LOW || digitalRead(ledsJ2[i]) == LOW) {
-          todosLedsEn = false;
-          break;
-        }
+        if (digitalRead(ledsJ1[i]) == HIGH) ledsEncendidosJ1++;
+        if (digitalRead(ledsJ2[i]) == HIGH) ledsEncendidosJ2++;
       }
 
-      if (todosLedsEn) {
-        for (int i = 0; i < cuentaLeds; i++) {
+      // Encendemos un LED al azar solo si hay menos de dos encendidos
+      if (ledsEncendidosJ1 < ledsMax) {
+        int pin_light = random(0, cuentaLeds);
+        digitalWrite(ledsJ1[pin_light], HIGH);
+        tiempoEncendidoJ1[pin_light] = tiempoActual; // Registrar el tiempo de encendido
+      }
+
+      if (ledsEncendidosJ2 < ledsMax) {
+        int pin_light = random(0, cuentaLeds);
+        digitalWrite(ledsJ2[pin_light], HIGH);
+        tiempoEncendidoJ2[pin_light] = tiempoActual; // Registrar el tiempo de encendido
+      }
+      
+      ultimoCambioLED = tiempoActual;
+
+      // Apagado automático de LEDs después de 1 segundo si no se presionan
+      for (int i = 0; i < cuentaLeds; i++) {
+        if (digitalRead(ledsJ1[i]) == HIGH && tiempoActual - tiempoEncendidoJ1[i] >= tiempoLedsEn) {
           digitalWrite(ledsJ1[i], LOW);
+        }
+        if (digitalRead(ledsJ2[i]) == HIGH && tiempoActual - tiempoEncendidoJ2[i] >= tiempoLedsEn) {
           digitalWrite(ledsJ2[i], LOW);
         }
-        delay(200);
       }
     }
 
@@ -88,7 +106,6 @@ void loop() {
       }
     }
   } else {
-    // Jugador 1 Gana
     if (puntajeJ1 >= puntajeMax) {
       for (int i = 0; i < 3; i++) {
         for (int j = 0; j < cuentaLeds; j++) {
@@ -101,7 +118,7 @@ void loop() {
         }
         delay(500);
       }
-    } else if (puntajeJ2 >= puntajeMax) { //Jugador 2 Gana
+    } else if (puntajeJ2 >= puntajeMax) {
       for (int i = 0; i < 3; i++) {
         for (int j = 0; j < cuentaLeds; j++) {
           digitalWrite(ledsJ2[j], HIGH);
