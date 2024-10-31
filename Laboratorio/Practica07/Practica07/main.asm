@@ -1,0 +1,47 @@
+;
+; Practica07.asm
+;
+; Created: 31/10/2024 09:55:22 a. m.
+; Author : Madris
+;
+
+
+.org 0x00
+	RJMP INICIO
+	.ORG 0X001A
+	RJMP RSI_T1
+
+INICIO:
+    SEI
+    LDI R16, 0X08
+    LDI R17, 0XFF
+    OUT SPL, R17
+    OUT SPH, R16
+    
+	OUT DDRB, R17
+
+    LDI R16, 0X01
+    STS TIMSK1, R16
+
+    LDI R20, 0X00
+    OUT TIFR1, R20
+    
+	LDI R17, 0X03
+    STS TCCR1B, R17
+
+    LDI R18, 0XF6
+    LDI R19, 0XC2
+    STS TCNT1H, R19
+    STS TCNT1L, R18
+
+    OUT PORTB, R20
+
+FIN:
+    RJMP FIN
+
+RSI_T1:
+    STS TCNT1L, R18
+    STS TCNT1H, R19
+    INC R20
+    OUT PORTB, R20
+    RETI
