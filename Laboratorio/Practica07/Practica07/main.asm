@@ -6,7 +6,7 @@
 ;
 
 
-.org 0x00
+.ORG 0x00
 	RJMP INICIO
 	.ORG 0X001A
 	RJMP RSI_T1
