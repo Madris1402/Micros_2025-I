@@ -5,13 +5,13 @@
 ; Author : Madris
 ;
 
-sbi ddrd, 6
-ldi r16, 0x83
-ldi r17, 0x05
-ldi r18, 0x7F
+SBI ddrd, 6
+LDI r16, 0x83
+LDI r17, 0x05
+LDI r18, 0x7F
 
-out tccr0a, r16
-out tccr0b, r17
-out ocr0a, r18
+OUT tccr0a, r16
+OUT tccr0b, r17
+OUT ocr0a, r18
 
-fin: rjmp fin
+FIN: rjmp FIN
