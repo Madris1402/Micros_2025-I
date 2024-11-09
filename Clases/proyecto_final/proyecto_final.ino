@@ -5,8 +5,8 @@ int contador = 0;
 int botones[] = {913, 429, 267, 179, 110};
 int btn_tol = 20;
 int analogValue = 0;
-int pinJ1 = A0;
-int pinJ2 = A2;
+int pinJ1 = A3;
+int pinJ2 = A5;
 int cuentaLeds = 5;
 int ledsJ1[5] = {2, 3, 4, 5, 6};
 int ledsJ2[5] = {8, 9, 10, 11, 12};
@@ -16,10 +16,17 @@ int puntajeJ2 = 0;
 int velocidad = 1500;
 int velocidad_min = 250;
 int puntajeMax = 15;
-unsigned long tiempoLedsEn = 600; 
+unsigned long tiempoLedsEn = 700; 
 unsigned long ultimoCambioLED = 0;
 unsigned long tiempoEncendidoJ1[5] = {0, 0, 0, 0, 0}; // Array para almacenar el tiempo de encendido de cada LED de J1
 unsigned long tiempoEncendidoJ2[5] = {0, 0, 0, 0, 0}; // Array para almacenar el tiempo de encendido de cada LED de J2
+
+const int numReadings = 10;
+int readings[numReadings];      // the readings from the analog input
+int index = 0;                  // the index of the current reading
+int total = 0;                  // the running total
+int average = 0;                // the average   
+
 
 void setup() {
   Serial.begin(9600);
@@ -33,6 +40,17 @@ void setup() {
 
 void loop() {
   unsigned long tiempoActual = millis();
+
+  total = total - readings[index];
+  readings[index] = analogRead(pinJ1);
+  total = total + readings[index];
+  index = index + 1;
+  if (index >= numReadings) 
+    index = 0;
+  average = total / numReadings;
+
+  // Aumentar btn_tol para una detección menos sensible
+  int btn_tol_ajustado = 50;
 
   if (puntajeJ1 < puntajeMax && puntajeJ2 < puntajeMax) {
     contador++;
